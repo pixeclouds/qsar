@@ -11,7 +11,7 @@ def hello():
         data = request.json
         print(data)
     else:
-        data = { "smiles": "N#CC1=C(N)OC(C2=CC=CC=C2)=C(C(C)=O)C1C3=CC=C(Cl)C=C3", "model":"c-qsar"}
+        data = { "smiles": "CCC", "model":"c-qsar"}
     # return jsonify({'message': 'Hello, World!'})
     prediction = predict_activity(data)
     print(prediction)

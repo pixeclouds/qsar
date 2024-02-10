@@ -7,8 +7,13 @@ def predict_activity(input_dict):
 
     if model == 'c-qsar':
         features = c_qsar_features(smiles)
-        # predict 
+        bioactivity = c_qsar(features)
+        return bioactivity
     
     if model == 'p-qsar':
         features = p_qsar_features(smiles)
+        bioactivity = p_qsar(features)
+        return bioactivity
+
+
     

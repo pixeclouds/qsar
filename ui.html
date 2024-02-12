@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bioactivity Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */ /* Removed */
+            height: 100vh;
+            text-align: center;
+        }
+        .container {
+            padding-top: 5px;
+            width: 80%;
+            max-width: 600px;
+            min-height: 300px; /* Added */
+            position: relative;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .input-group input[type="text"],
+        .input-group input[type="radio"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .input-group input[type="text"] {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .input-group label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        #predictButton {
+            padding: 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #predictButton:hover {
+            background-color: #0056b3;
+        }
+        .loading-container {
+            display: none;
+            margin-top: 20px;
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .loading-rectangle {
+            width: 20px;
+            height: 20px;
+            background-color: rgba(221, 221, 221, 0.3);
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .loading-rectangle:nth-child(1) {
+            animation: loadingStep1 1s infinite;
+            background-color: rgba(221, 221, 221, 0.8);
+        }
+        .loading-rectangle:nth-child(2) {
+            animation: loadingStep2 1s infinite;
+            background-color: rgba(221, 221, 221, 0.6);
+        }
+        .loading-rectangle:nth-child(3) {
+            animation: loadingStep3 1s infinite;
+            background-color: rgba(221, 221, 221, 0.4);
+        }
+        @keyframes loadingStep1 {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 1; }
+        }
+        @keyframes loadingStep2 {
+            0% { opacity: 0; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes loadingStep3 {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .result {
+            display: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Bioactivity Predictor</h1>
+        <p class="desc">This site predicts the bioactivity of pyran derivatives against A549 lung cancer cell lines using pretrained models.</p>
+        <div class="input-group">
+            <input type="text" id="compoundSmiles" placeholder="Enter compound SMILES">
+        </div>
+        <div class="input-group">
+            <label>Choose prediction method:</label>
+            <label><input type="radio" name="predictionMethod" value="c-qsar" checked> c-qsar</label>
+            <label><input type="radio" name="predictionMethod" value="p-qsar"> p-qsar</label>
+            <label><input type="radio" name="predictionMethod" value="ELM"> ELM</label>
+        </div>
+        <button onclick="sendPredictionRequest()" id="predictButton">Predict</button>
+        <div class="loading-container" id="loadingContainer">
+            <div class="loading-rectangle"></div>
+            <div class="loading-rectangle"></div>
+            <div class="loading-rectangle"></div>
+        </div>
+        <div class="result" id="predictionResult">
+            Prediction will be displayed here
+        </div>
+    </div>
+
+    <script>
+        function sendPredictionRequest() {
+            var selectedMethod = document.querySelector('input[name="predictionMethod"]:checked');
+            var compoundSmiles = document.getElementById("compoundSmiles").value.trim();
+            var loadingContainer = document.getElementById("loadingContainer");
+            var resultDisplay = document.getElementById("predictionResult");
+
+            // Show loading animation
+            loadingContainer.style.display = "inline-block";
+            resultDisplay.style.display = "none";
+
+            // Simulating request processing
+            setTimeout(function () {
+                // Simulating received response
+                var prediction = "This is a mock prediction";
+                // Update result display
+                resultDisplay.innerHTML = prediction;
+                // Hide loading animation
+                loadingContainer.style.display = "none";
+                resultDisplay.style.display = "block";
+            }, 2000); // Simulating 2 seconds of server processing time
+        }
+    </script>
+</body>
+</html>

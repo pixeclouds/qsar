@@ -18,12 +18,6 @@ def c_qsar(features):
     SpMin5_Bhp = features[3]
     ETA_dAlpha_B = features[4]
 
-    print("FEATURES MODEL, ", features)
-    # Define the coefficients and features
-    coefficients = [-0.000419117, 0.006914343, -0.197988304, -1.895865090, -67.605895028, 9.171571170]
-
-    # Calculate the value using the formula
-    # Y = sum(coef * feature for coef, feature in zip(coefficients, features))
     Y = (-0.000419117 * ATSC6v) + (0.006914343 * VR1_Dzp) - (0.197988304 * VR2_Dzp) - (1.895865090 * SpMin5_Bhp) - (67.605895028 * ETA_dAlpha_B) + 9.171571170
 
     # Round the result to four decimal places

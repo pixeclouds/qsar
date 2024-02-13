@@ -4,19 +4,19 @@ from predict import predict_activity
 app = Flask(__name__)
 
 # Define a sample route
-@app.route('/pred', methods=['GET'])
+@app.route('/predict', methods=['GET'])
 def hello():
 
     if request.is_json:
         data = request.json
         print(data)
     else:
-        data = { "smiles": "N#CC1=C(N)OC(/C(C)=C/C)=C(CC)C1/C=C/C", "model":"c-qsar"}
+        data = { "smiles": "Cl#CC1=C(N)OC(/C(C)=C/C)=C(CC)C1/C=C/C", "model":"c-qsar"}
     # return jsonify({'message': 'Hello, World!'})
     prediction = predict_activity(data)
     print(prediction)
 
-    return jsonify({"pred":prediction})
+    return jsonify({"activity":prediction})
 
 # Define a route that accepts POST requests with JSON data
 @app.route('/', methods=['GET'])

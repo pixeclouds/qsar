@@ -16,7 +16,7 @@ def hello():
     prediction = predict_activity(data)
     print(prediction)
 
-    return jsonify({"pred":prediction})
+    return jsonify({"activity":prediction})
 
 # Define a route that accepts POST requests with JSON data
 @app.route('/', methods=['GET'])

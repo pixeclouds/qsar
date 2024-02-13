@@ -5,6 +5,8 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+# this is a comment
+
 @app.route('/predict', methods=['POST'])
 def hello():
 

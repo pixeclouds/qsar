@@ -1,10 +1,11 @@
 from flask import Flask, request, jsonify, render_template
 from predict import predict_activity
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
-# Define a sample route
-@app.route('/predict', methods=['GET'])
+@app.route('/predict', methods=['POST'])
 def hello():
 
     if request.is_json:
@@ -12,17 +13,16 @@ def hello():
         print(data)
     else:
         data = { "smiles": "Cl#CC1=C(N)OC(/C(C)=C/C)=C(CC)C1/C=C/C", "model":"c-qsar"}
-    # return jsonify({'message': 'Hello, World!'})
     prediction = predict_activity(data)
     print(prediction)
 
     return jsonify({"activity":prediction})
 
-# Define a route that accepts POST requests with JSON data
+
 @app.route('/', methods=['GET'])
 def echo():
-     # Get JSON data from the request
-    return "HELLO WORLD"  # Echo back the JSON data
+
+    return jsonify({"message":"Server is up and running"}) 
 
 if __name__ == '__main__':
     app.run(debug=True)  # Run the Flask app in debug mode
